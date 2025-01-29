@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BridgeSense Form</title>
+    <link rel="stylesheet" href="/static/CSS/trial.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+</head>
+<body>
+    <div id="main">
+        <div id="nav">
+            <div id="left">
+                <div id="image">
+                    <img src="/static/images/letter-b.png" alt="">
+                </div>
+                <h1>BridgeSense</h1>
+            </div>
+        </div>
+
+        <div id="heading">
+            <h3>Analysis Metrics</h3>
+        </div>
+
+        <div id="container">
+            <!-- Age and Traffic -->
+            <form id="form-1">
+                <label>Age (years):</label>
+                <input type="text" id="age" required>
+
+                <label>Traffic Volume (vehicles/day):</label>
+                <input type="text" id="traffic" required>
+            </form>
+
+            <!-- Weather -->
+            <form id="form-2">
+                <p>Weather:</p>
+                <label><input type="radio" name="weather" value="sunny"> Sunny</label>
+                <label><input type="radio" name="weather" value="windy"> Windy</label>
+                <label><input type="radio" name="weather" value="cloudy"> Cloudy</label>
+                <label><input type="radio" name="weather" value="rainy"> Rainy</label>
+            </form>
+
+            <!-- Waterflow and Stress -->
+            <form id="form-3">
+                <label>Waterflow Rate (m³/s):</label>
+                <input type="text" id="waterflow" required>
+            </form>
+
+            <form id="form-4">
+                <label>Stress (MPa):</label>
+                <input type="text" id="stress" required>
+
+                <label>Rainfall (mm):</label>
+                <input type="text" id="rainfall" required>
+            </form>
+
+            <!-- Design -->
+            <form id="form-5">
+                <p>Bridge Design:</p>
+                <label><input type="radio" name="design" value="arch"> Arch</label>
+                <label><input type="radio" name="design" value="beam"> Beam</label>
+                <label><input type="radio" name="design" value="truss"> Truss</label>
+            </form>
+
+            <!-- Humidity -->
+            <form id="form-6">
+                <label>Humidity (%):</label>
+                <input type="text" id="humidity" required>
+            </form>
+
+            <!-- Submit Button -->
+            <div id="submit">
+                <button type="submit">SUBMIT</button>
+            </div>
+
+            <div id="result">
+                <p id="predictionResult"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("#submit button").addEventListener("click", async function (event) {
+                event.preventDefault();
+
+                const formData = {
+                    age: parseFloat(document.querySelector("#age").value),
+                    traffic: parseFloat(document.querySelector("#traffic").value),
+                    weather: document.querySelector("input[name='weather']:checked")?.value,
+                    waterflow: parseFloat(document.querySelector("#waterflow").value),
+                    stress: parseFloat(document.querySelector("#stress").value),
+                    rainfall: parseFloat(document.querySelector("#rainfall").value),
+                    design: document.querySelector("input[name='design']:checked")?.value,
+                    humidity: parseFloat(document.querySelector("#humidity").value)
+                };
+
+                const response = await fetch("http://127.0.0.1:8000/predict", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+                document.getElementById("predictionResult").textContent = "Risk Prediction: " + result.status;
+            });
+        });
+    </script>
+</body>
+</html>

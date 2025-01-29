@@ -1,0 +1,178 @@
+@font-face {
+    font-family: cooper;
+    src: url(./CooperLightBT.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    min-height: 100%;
+    width: 100%;
+    font-family: "M PLUS Rounded 1c", serif;
+    font-weight: 400;
+    font-style: normal;
+    scrollbar-width: none;
+}
+
+#main {
+    width: 100%;
+    height: auto;
+    background-image: url("/static/images/grid.png");
+    background-position: center;
+    background-size: cover;
+    animation: fadeIn 0.5s ease-out;
+    /* padding-bottom: 40px; */
+}
+
+#nav {
+    width: 100%;
+}
+
+#left {
+    margin-left: 7%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+#image img {
+    width: 50px;
+    height: 50px;
+}
+
+#left h1 {
+    font-size: 32px;
+    font-family: "Inter", serif;
+    font-weight: 400;
+    margin-left: 20px;
+    color: rgb(0, 0, 0);
+    word-spacing: 2px;
+    opacity: 0;
+    animation: slideIn 2s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#container {
+    width: 80%;
+    max-width: 800px;
+    background-color: rgba(238, 238, 238, 0.973);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#heading {
+    text-align: center;
+    font-size: 40px;
+    font-family: "cooper", serif;
+    font-weight: 300;
+    padding-bottom: 5px;
+}
+
+#heading::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    background-color: #f9a82f;
+    transition: transform 0.3s ease-out;
+}
+
+#heading:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* FORM STYLES */
+#project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+#project-form label {
+    font-size: 18px;
+    color: #666;
+}
+
+#project-form input {
+    width: 100%;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#project-form input:focus, #project-form input:hover {
+    border: 2px solid #f9a82f;
+    outline: none;
+}
+
+/* SUBMIT BUTTON */
+#submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#submit button {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    background-color: #f9a82f;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#submit button:hover {
+    background-color: #d88a26;
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    #container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #project-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #project-form input {
+        width: 100%;
+    }
+
+    #submit button {
+        width: 100%;
+    }
+
+    #heading {
+        font-size: 32px;
+    }
+}

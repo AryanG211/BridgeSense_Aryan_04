@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Upload Form</title>
+    <link rel="stylesheet" href="/static/CSS/crack.css">
+</head>
+<body>
+    <div id="main">
+        <div id="nav">
+            <div id="left">
+                <div id="image"><img src="/static/images/letter-b.png" alt=""></div>
+                <h1>BridgeSense</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Upload a Video for Crack Detection</h2>
+
+            <div id="video">
+                <form id="video-form" enctype="multipart/form-data">
+                    <label for="video-upload">Select a Video:</label>
+                    <input type="file" id="video-upload" name="video" accept="video/*" required>
+                </form>
+                
+                <video id="preview-video" controls style="display: none;"></video>
+            </div>
+            
+            <button id="upload-btn" type="button">Upload</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("video-upload").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const video = document.getElementById("preview-video");
+                video.src = URL.createObjectURL(file);
+                video.style.display = "block";
+            }
+        });
+
+        document.getElementById("upload-btn").addEventListener("click", async function() {
+            const formData = new FormData();
+            const videoFile = document.getElementById("video-upload").files[0];
+
+            if (!videoFile) {
+                alert("Please select a video.");
+                return;
+            }
+
+            formData.append("video", videoFile); 
+
+            try {
+                const response = await fetch("/process_video", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const processedVideoURL = URL.createObjectURL(blob);
+                    const video = document.getElementById("preview-video");
+                    video.src = processedVideoURL;
+                    video.style.display = "block";
+                } else {
+                    const errorText = await response.text();
+                    alert(`Video processing failed: ${errorText}`);
+                }
+            } catch (error) {
+                alert("Error uploading video: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

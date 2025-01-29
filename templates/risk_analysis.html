@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BridgeSense Form</title>
+    <link rel="stylesheet" href="/static/CSS/risk_analysis.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+</head>
+
+<body>
+    <div id="main">
+        <div id="nav">
+            <div id="left">
+                <div id="image"><img src="/static/images/letter-b.png" alt=""></div>
+                <h1>BridgeSense</h1>
+            </div>
+        </div>
+
+        <div id="heading">
+            <h3>Analysis Metrics</h3>
+        </div>
+
+        <div id="container">
+            <form>
+                <label>Age (years):</label>
+                <input type="text" required>
+
+                <label>Traffic Volume (vehicles/day):</label>
+                <input type="text" required>
+                <div id="weather">
+
+                    <p>Weather:</p>
+                    <label><input type="radio" name="weather" value="sunny"> Sunny</label>
+                    <label><input type="radio" name="weather" value="windy"> Windy</label>
+                    <label><input type="radio" name="weather" value="cloudy"> Cloudy</label>
+                    <label><input type="radio" name="weather" value="rainy"> Rainy</label>
+                </div>
+
+                <label>Waterflow Rate (m³/s):</label>
+                <input type="text" required>
+
+                <label>Stress (MPa):</label>
+                <input type="text" required>
+
+                <label>Rainfall (mm):</label>
+                <input type="text" required>
+
+                <div id="weather">
+
+                    <p>Bridge Design:</p>
+                    <label><input type="radio" name="design" value="arch"> Arch</label>
+                    <label><input type="radio" name="design" value="beam"> Beam</label>
+                    <label><input type="radio" name="design" value="truss"> Truss</label>
+
+                </div>
+
+
+                <label>Humidity (%):</label>
+                <input type="text" required>
+
+                <div id="submit">
+                    <button type="submit">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

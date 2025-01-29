@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BridgeSense</title>
+    <link rel="stylesheet" href="/static/CSS/Risk.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="main">
+        <div id="nav">
+            <div id="left">
+                <div id="image"><img src="/static/images/letter-b.png" alt=""></div>
+                <h1>BridgeSense</h1>
+            </div>
+            <div id="button_div">
+                <!-- Update the link to direct to the FastAPI route for autho_ -->
+                <button onclick="gotopage('/autho_')">NEW PROJECT</button>
+            </div>
+        </div> 
+        <div class="content">
+            <div>
+                <h3>Risk Analysis</h3>
+                <p>Analyze structural integrity by identifying weak points and predicting failures.This helps proactuve maintainance and ensures the long term safety of the bridge .</p>
+                <button onclick="gotopage('/trial')">Risk analyze</button>
+            </div>
+            <div><img src="/static/images/risk.png" alt="Risk Analysis"></div>
+        </div>
+        <div class="content">
+            <div><img src="/static/images/camera-drone.png" alt="Drone"></div>
+            <div>
+                <h3>Crack Monitoring</h3>
+                <p>Utilizing real-time drone images to detect and track cracks for timely repairs. early Identification allows timely repairs preventing further damage and ensuring structural stability .</p>
+                <button onclick="gotopage('/crack')">Crack Detection</button>
+
+            </div>
+        </div>
+        <div id="footer">
+            <div id="icons">
+                <img src="/static/images/facebook.png" alt="Facebook">
+                <img src="/static/images/instagram.png" alt="Instagram">
+                <img src="/static/images/twitter.png" alt="Twitter">
+            </div>
+            <div>
+                <p>@2025 BridgeSense. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function gotopage(page) {
+        window.location.href = page; // This will redirect to the specified page
+    }
+</script>
+</html>

@@ -30,7 +30,7 @@
                 <label>Traffic Volume (vehicles/day):</label>
                 <input type="text" required>
                 <div id="weather">
-
+ 
                     <p>Weather:</p>
                     <label><input type="radio" name="weather" value="sunny"> Sunny</label>
                     <label><input type="radio" name="weather" value="windy"> Windy</label>
@@ -60,12 +60,27 @@
                 <label>Humidity (%):</label>
                 <input type="text" required>
 
-                <div id="submit">
-                    <button type="submit">SUBMIT</button>
-                </div>
+                <button type="button" id="submitBtn">Get Result</button>
+                
             </form>
+            
+
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <p id="resultMessage">Your result will appear here.</p>
+                    <button class="ok-btn" id="closeBtn">OK</button>
+                </div>
+            </div>
+        
+            
         </div>
     </div>
+    <script src="script.js">
+        
+    </script>
 </body>
+
+
+            
 
 </html>

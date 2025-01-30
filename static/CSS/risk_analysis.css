@@ -16,6 +16,10 @@ body, html {
     font-weight: 400;
     font-style: normal;
     scrollbar-width: none;
+    /* font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal; */
 }
 
 #main {
@@ -26,6 +30,7 @@ body, html {
     background-size: cover;
     animation: fadeIn 0.5s ease-out;
     padding-bottom: 40px;
+
 }
 
 #nav {
@@ -195,3 +200,71 @@ form label input[type="radio"] {
         font-size: 32px;
     }
 }
+
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.popup.active {
+    visibility: visible;
+    opacity: 1;
+
+}
+
+.popup-content {
+    background-color: rgb(228, 228, 228);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 30%;
+    height: 30%;
+    font-size: 30px;
+    box-shadow: 0px 8px 4px rgb(128, 128, 128);
+}
+
+.ok-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 60px;
+}
+
+.ok-btn:hover {
+    background-color: #45a049;
+}
+
+
+/* Button */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #f9a82f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #d88a26;
+}
+
+

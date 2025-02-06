@@ -1,6 +1,6 @@
 @font-face {
     font-family: cooper;
-    src: url(./CooperLightBT.ttf);
+    src: url(/static/CSS/CooperLightBT.ttf);
 }
 
 * {
@@ -198,52 +198,62 @@ input[type="radio"] {
     }
 }
 
+/* Popup Overlay */
 .popup {
+    display: none;  /* Initially hidden */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    background: rgba(0, 0, 0, 0.7); /* Slightly darker background */
     justify-content: center;
     align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s;
+    z-index: 9999; /* Ensure popup is above other elements */
 }
 
-.popup.active {
-    visibility: visible;
-    opacity: 1;
-
-}
-
+/* Popup Content Box */
 .popup-content {
-    background-color: rgb(228, 228, 228);
-    padding: 20px;
-    border-radius: 10px;
+    background: #ffffff; /* White background */
+    padding: 30px;  /* More padding for spacious design */
+    border-radius: 12px;  /* More rounded corners */
     text-align: center;
-    width: 30%;
-    height: 30%;
-    font-size: 30px;
-    box-shadow: 0px 8px 4px rgb(128, 128, 128);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow for a modern look */
+    width: 80%;  /* Make it responsive */
+    max-width: 400px;  /* Max width for larger screens */
+    animation: fadeIn 0.3s ease-out;  /* Smooth fade-in animation */
 }
 
+/* OK Button Styling */
 .ok-btn {
+    margin-top: 15px;  /* Spacing above button */
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background: #007bff;  /* Blue color */
     color: white;
     border: none;
     border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 60px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Hover effect for OK button */
 .ok-btn:hover {
-    background-color: #45a049;
+    background: #0056b3;  /* Darker blue on hover */
+    transform: scale(1.05);  /* Slightly grow the button on hover */
 }
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
 
 
 /* Button */
@@ -262,3 +272,46 @@ button {
 button:hover {
     background-color: #d88a26;
 }
+
+/* Result Box */
+#result {
+    display: none; /* Initially hidden */
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-left: 5px solid #f9a82f;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;  /* Start transparent */
+    transform: translateY(20px) scale(0.9); /* Start lower and smaller */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Show result with a better animation */
+#result.show {
+    display: block;
+    opacity: 1;  /* Fade in */
+    transform: translateY(0) scale(1); /* Slide up and scale to normal */
+}
+
+/* Animation Keyframes */
+@keyframes resultAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Apply the animation */
+#result.animate {
+    animation: resultAppear 0.5s ease-out;
+}
+

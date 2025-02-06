@@ -78,87 +78,87 @@
                  <p id="predictionResult"></p> 
             </div> 
 
-            <!-- <div id="result" class="popup">
-                <div class="popup-content">
-                    <p id="predictionResult">Your result will appear here.</p>
-                    <button class="ok-btn" id="closeBtn">OK</button>
-                </div>
-            </div> --> 
+            <div id="result">
+                <p id="predictionResult"></p>
+            </div>
+            
+            
         </div>
     </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector("#submit button").addEventListener("click", async function (event) {
-        event.preventDefault();
-
-        const formData = {
-            age: parseFloat(document.querySelector("#age").value),
-            traffic: parseFloat(document.querySelector("#traffic").value),
-            weather: document.querySelector("input[name='weather']:checked")?.value || "",
-            waterflow: parseFloat(document.querySelector("#waterflow").value),
-            stress: parseFloat(document.querySelector("#stress").value),
-            rainfall: parseFloat(document.querySelector("#rainfall").value),
-            design: document.querySelector("input[name='design']:checked")?.value || "",
-            humidity: parseFloat(document.querySelector("#humidity").value)
-        };
-
-        // Validate required fields
-        if (isNaN(formData.age) || isNaN(formData.traffic) || 
-            isNaN(formData.waterflow) || isNaN(formData.stress) ||
-            isNaN(formData.rainfall) || isNaN(formData.humidity) || 
-            !formData.weather || !formData.design) {
-            alert("Please fill in all required fields.");
-            return;
-        }
-
-        try {
-            const response = await fetch("http://127.0.0.1:8000/predict", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const result = await response.json();
-
-            // Determine maintenance duration based on risk prediction
-            let maintenanceDuration = "";
-            if (result.status.toLowerCase() === "low") {
-                maintenanceDuration = "5-6 years";
-            } else if (result.status.toLowerCase() === "moderate") {
-                maintenanceDuration = "3-4 years";
-            } else {
-                maintenanceDuration = "1-1.5 years";
-            }
-
-            // Set the result text including maintenance duration
-            document.getElementById("predictionResult").textContent = 
-                `Risk Prediction: ${result.status}\nMaintenance Duration: ${maintenanceDuration}`;
-
-            // Show the result
-            document.getElementById("result").style.display = "flex";
-
-        } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred while fetching the prediction.");
-        }
-    });
-
-    // Close the popup when the "OK" button is clicked (if popup exists)
-    const closeBtn = document.getElementById("closeBtn");
-    if (closeBtn) {
-        closeBtn.addEventListener("click", function() {
-            document.getElementById("result").style.display = "none";
-        });
-    }
-});
-
-
-
-
+  
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelector("#submit button").addEventListener("click", async function (event) {
+                    event.preventDefault();
             
-    </script>
+                    const formData = {
+                        age: parseFloat(document.querySelector("#age").value),
+                        traffic: parseFloat(document.querySelector("#traffic").value),
+                        weather: document.querySelector("input[name='weather']:checked")?.value || "",
+                        waterflow: parseFloat(document.querySelector("#waterflow").value),
+                        stress: parseFloat(document.querySelector("#stress").value),
+                        rainfall: parseFloat(document.querySelector("#rainfall").value),
+                        design: document.querySelector("input[name='design']:checked")?.value || "",
+                        humidity: parseFloat(document.querySelector("#humidity").value)
+                    };
+            
+                    // Validate required fields
+                    if (isNaN(formData.age) || isNaN(formData.traffic) || 
+                        isNaN(formData.waterflow) || isNaN(formData.stress) ||
+                        isNaN(formData.rainfall) || isNaN(formData.humidity) || 
+                        !formData.weather || !formData.design) {
+                        alert("Please fill in all required fields.");
+                        return;
+                    }
+            
+                    try {
+                        console.log("Sending data:", formData);
+            
+                        const response = await fetch("http://127.0.0.1:8000/predict", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(formData)
+                        });
+            
+                        const result = await response.json();
+                        console.log("API Response:", result);
+            
+                        if (!result.status) {
+                            alert("Unexpected response format from server!");
+                            return;
+                        }
+            
+                        // Maintenance duration based on risk
+                        const maintenanceDurations = {
+                            "low": "5-6 years",
+                            "moderate": "3-4 years",
+                            "high": "1-1.5 years"
+                        };
+            
+                        const maintenanceDuration = maintenanceDurations[result.status.toLowerCase()] || "Unknown";
+            
+                        // Update the result text
+                        const resultDiv = document.getElementById("result");
+                        resultDiv.innerHTML = `<p>Risk Prediction: <strong>${result.status}</strong></p>
+                                               <p>Maintenance Duration: <strong>Within ${maintenanceDuration}</strong></p>`;
+            
+                        // Show the result with enhanced animation
+                        resultDiv.classList.remove("animate");  // Reset animation
+                        void resultDiv.offsetWidth;  // Force reflow to restart animation
+                        resultDiv.classList.add("show", "animate");
+            
+                    } catch (error) {
+                        console.error("Error:", error);
+                        alert("An error occurred while fetching the prediction.");
+                    }
+                });
+            });
+            </script>
+            
+
+
+        
 </body>
 </html>

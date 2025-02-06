@@ -1,6 +1,6 @@
 @font-face {
     font-family: cooper;
-    src: url(./CooperLightBT.ttf);
+    src: url(/static/CSS/CooperLightBT.ttf);
 }
 
 * {
